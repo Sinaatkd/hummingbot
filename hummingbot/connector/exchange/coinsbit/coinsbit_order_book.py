@@ -9,6 +9,26 @@ from hummingbot.core.data_type.order_book_message import OrderBookMessage, Order
 class CoinsbitOrderBook(OrderBook):
 
     @classmethod
+    def diff_message_from_exchange(cls,
+                                   msg: Dict[str, any],
+                                   timestamp: Optional[float] = None,
+                                   metadata: Optional[Dict] = None) -> OrderBookMessage:
+        """
+        Creates a diff message with the changes in the order book received from the exchange
+        :param msg: the changes in the order book
+        :param timestamp: the timestamp of the difference
+        :param metadata: a dictionary with extra information to add to the difference data
+        :return: a diff message with the changes in the order book notified by the exchange
+        """
+        if metadata:
+            msg.update(metadata)
+        return OrderBookMessage(OrderBookMessageType.DIFF, {
+            "trading_pair": msg["trading_pair"],
+            "bids": msg['params'][1]["bids"],
+            "asks": msg['params'][1]["asks"]
+        }, timestamp=timestamp)
+
+    @classmethod
     def trade_message_from_exchange(cls, msg: Dict[str, any], metadata: Optional[Dict] = None):
         """
         Creates a trade message with the information from the trade event sent by the exchange
