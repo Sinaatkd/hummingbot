@@ -12,3 +12,8 @@ PRIVATE_API_vERSION = 'v1'
 # Private API endpoints
 ACCOUNT_BALANCES_PATH = '/account/balances'
 ACCOUNT_BALANCE_PATH = '/account/balance'
+
+
+# Coinsbit params
+SIDE_BUY = "buy"
+SIDE_SELL = "sell"
