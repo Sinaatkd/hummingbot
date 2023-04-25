@@ -17,3 +17,6 @@ ACCOUNT_BALANCE_PATH = '/account/balance'
 # Coinsbit params
 SIDE_BUY = "buy"
 SIDE_SELL = "sell"
+
+
+RATE_LIMIT = []
