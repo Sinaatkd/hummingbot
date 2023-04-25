@@ -13,6 +13,7 @@ PRIVATE_API_vERSION = 'v1'
 ACCOUNT_BALANCES_PATH = '/account/balances'
 ACCOUNT_BALANCE_PATH = '/account/balance'
 
+WS_HEARTBEAT_TIME_INTERVAL = 30
 
 # Coinsbit params
 SIDE_BUY = "buy"
