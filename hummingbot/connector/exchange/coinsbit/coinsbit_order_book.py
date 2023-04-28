@@ -58,15 +58,17 @@ class CoinsbitOrderBook(OrderBook):
         """
         if metadata:
             msg.update(metadata)
-        ts = msg["result"][5]
-        price = msg["result"][2]
-        side = msg['result'][3]
-        amount = msg["result"][8]
+        params = msg['params'][1]
+        ts = params['time']
+        price = params['price']
+        side = params['type']
+        amount = params['amount']
+        trade_id = params['id']
         trade_type = float(TradeType.SELL.value) if side == CONSTANTS.SIDE_SELL else float(TradeType.BUY.value)
         return OrderBookMessage(OrderBookMessageType.TRADE, {
             "trading_pair": msg["trading_pair"],
             "trade_type": trade_type,
-            "trade_id": msg["t"],
+            "trade_id": trade_id,
             "update_id": ts,
             "price": price,
             "amount": amount
