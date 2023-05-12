@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Any, Dict, Optional
 
 import hummingbot.connector.exchange.coinsbit.coinsbit_constants as CONSTANTS
 from hummingbot.connector.time_synchronizer import TimeSynchronizer
@@ -75,3 +75,10 @@ async def get_current_server_time(
     server_time = await ws_assistant.receive()['result']
     await ws_assistant.disconnect()
     return server_time
+
+
+def is_pair_information_valid(pair_info: Dict[str, Any]) -> bool:
+    """
+    Coinsbit has not provided any documentation in this regard
+    """
+    return True
