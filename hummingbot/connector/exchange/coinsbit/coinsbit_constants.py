@@ -1,3 +1,5 @@
+from hummingbot.core.api_throttler.data_types import LinkedLimitWeightPair, RateLimit
+
 # General Information
 EXCHANGE_NAME = 'coinsbit'
 DEFAULT_DOMAIN = 'io'
@@ -16,11 +18,11 @@ MAX_ORDER_ID_LEN = 32
 SNAPSHOT_PATH_URL = '/public/depth/result'
 TICKERS_BOOK_PATH_URL = '/public/tickers'
 TICKER_PATH_URL = '/public/ticker'
-CREATE_ORDER_PATH_URL = '/order/new'
 
 # Private API endpoints
+CREATE_ORDER_PATH_URL = '/order/new'
 ACCOUNT_BALANCES_PATH_URL = '/account/balances'
-ACCOUNT_BALANCE_PATH = '/account/balance'
+ACCOUNT_BALANCE_PATH_URL = '/account/balance'
 ACCOUNT_TRADE_PATH_URL = '/account/trades'
 CANCEL_ORDER_PATH = '/order/cancel'
 
@@ -36,4 +38,13 @@ TRADE_EVENT_TYPE = "deals.update"
 SIDE_BUY = "buy"
 SIDE_SELL = "sell"
 
-RATE_LIMIT = []
+RATE_LIMIT = [
+    RateLimit(limit_id=SNAPSHOT_PATH_URL, limit=200, time_interval=1, linked_limits=[LinkedLimitWeightPair(SNAPSHOT_PATH_URL)]),
+    RateLimit(limit_id=TICKERS_BOOK_PATH_URL, limit=200, time_interval=1, linked_limits=[LinkedLimitWeightPair(TICKERS_BOOK_PATH_URL)]),
+    RateLimit(limit_id=TICKER_PATH_URL, limit=200, time_interval=1, linked_limits=[LinkedLimitWeightPair(TICKER_PATH_URL)]),
+    RateLimit(limit_id=CREATE_ORDER_PATH_URL, limit=200, time_interval=1, linked_limits=[LinkedLimitWeightPair(CREATE_ORDER_PATH_URL)]),
+    RateLimit(limit_id=ACCOUNT_BALANCES_PATH_URL, limit=200, time_interval=1, linked_limits=[LinkedLimitWeightPair(ACCOUNT_BALANCES_PATH_URL)]),
+    RateLimit(limit_id=ACCOUNT_BALANCE_PATH_URL, limit=200, time_interval=1, linked_limits=[LinkedLimitWeightPair(ACCOUNT_BALANCE_PATH_URL)]),
+    RateLimit(limit_id=ACCOUNT_TRADE_PATH_URL, limit=200, time_interval=1, linked_limits=[LinkedLimitWeightPair(ACCOUNT_TRADE_PATH_URL)]),
+    RateLimit(limit_id=CANCEL_ORDER_PATH, limit=200, time_interval=1, linked_limits=[LinkedLimitWeightPair(CANCEL_ORDER_PATH)]),
+]
